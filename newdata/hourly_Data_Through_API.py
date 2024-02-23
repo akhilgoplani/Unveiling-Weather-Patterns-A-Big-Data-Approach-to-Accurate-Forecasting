@@ -22,12 +22,16 @@ base_site = "https://power.larc.nasa.gov/api/temporal/hourly/point"
 # today date 
 #current_date = datetime.now().strftime('%Y%m%d')
 current_date = datetime.now()
+current_date = current_date - timedelta(days=3)
 
 # Calculate the previous date
 previous_date = current_date - timedelta(days=1)
 
+
+
 current_date = current_date.strftime('%Y%m%d')
 previous_date = previous_date.strftime('%Y%m%d')
+#previous_date = "20231227"
 
 # Set the time to 00:00:00
 #previous_date_midnight = previous_date.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -44,7 +48,7 @@ for key,parameter in parameters.items():
     start = interval['start']
     end = interval['end']
     # Read latitude and longitude values from the CSV file
-    with open('/home/hadoop/Documents/Indian_Cities_Database_temp.csv', 'r') as csvfile:
+    with open('/home/hadoop/Documents/Indian_Cities_Database.csv', 'r') as csvfile:
         coordinates = csv.DictReader(csvfile)
         for row in coordinates:
             city = row['City']
@@ -84,7 +88,7 @@ for key,parameter in parameters.items():
                     # Append latitude and longitude to left.csv file
                     with open(left_file_path, 'a', newline='') as left_csvfile:
                         left_writer = csv.writer(left_csvfile)
-                        left_writer.writerow([city, latitude, longitude])
+                        left_writer.writerow([city, latitude, longitude,start, end])
 
             except Exception as e:
                 print("Exception occurred:", str(e))

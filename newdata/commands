@@ -1,0 +1,28 @@
+# mongodb installed
+command to 
+	sudo systemctl start mongod
+	sudo systemctl status mongod
+	sudo systemctl restart mongod
+	mongosh
+	sudo systemctl stop mongod
+
+# pyspark installed 
+
+# mongo and pyspark connector installing
+
+step:1 pyspark --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1
+
+step:2 spark-submit --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1 mongodb/dataPreprocessingWind.py
+
+
+# command to directly import csv file into the mongodb collection
+	mongoimport --host localhost  --db weather --collection humid --type csv --file Documents/Dataset/city/Pune/Pune.csv --headerline
+
+# airflow 
+	airflow db init
+	airflow webserver -p 8080
+	airflow scheduler
+
+# 
+
+

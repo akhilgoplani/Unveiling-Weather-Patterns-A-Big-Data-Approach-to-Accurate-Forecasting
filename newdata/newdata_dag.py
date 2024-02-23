@@ -17,12 +17,10 @@ temperatureData = BashOperator(task_id="temperatureData", dag=newdata_dag, bash_
 humidData = BashOperator(task_id="humidData", dag=newdata_dag, bash_command="spark-submit ~/Documents/newdata/dataPreprocessingHumid.py")
 windData = BashOperator(task_id="windData", dag=newdata_dag, bash_command="spark-submit ~/Documents/newdata/dataPreprocessingWind.py")
 
-cityData = BashOperator(task_id="cityData", dag=newdata_dag, bash_command="spark-submit ~/Documents/newdata/join_Temp_Humid_Wind.py")
+cityData = BashOperator(task_id="cityData", dag=newdata_dag, bash_command="spark-submit --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.2 ~/Documents/newdata/mongodb/join_Temp_Humid_Wind.py")
 
-clearTempData = BashOperator(task_id="clearTempData", dag=newdata_dag, bash_command="rm -r ~/Documents/newdata/temp/*")
+clearTempData = BashOperator(task_id="clearTempData", dag=newdata_dag, bash_command="bash ~/Documents/newdata/cleartemp.sh ")
 
 renameCityData = BashOperator(task_id="renameCity", dag=newdata_dag, bash_command="bash ~/Documents/rename.sh ~/Documents/newdata/city")
 
-modalTraining = BashOperator(task_id="modelTraining",dag=newdata_dag,bash_command="python3 ~/Documents/modaltraining.py")
-
-hello >>API >>[temperatureData,humidData,windData] >> cityData >> clearTempData >> modalTraining
+hello >>API >>[temperatureData,humidData,windData] >> cityData >> clearTempData >> renameCityData
