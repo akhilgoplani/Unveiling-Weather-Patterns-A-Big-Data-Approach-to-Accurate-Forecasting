@@ -10,7 +10,7 @@ From Know IT(Pune)
 
 Guided by:
 
-Trupti Joshi Ma’am & Prasad Deshmukh Sir
+Trupti Joshi Ma’am
 
 Submitted By:
 
